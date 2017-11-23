@@ -8,12 +8,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MyDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, "User.db", null, 1);
-        //dbHelper.getWritableDatabase();
+        dbHelper = new MyDatabaseHelper(this, "Shopping.db", null, 1);
+        dbHelper.getWritableDatabase();
         Button buttonLogin = (Button) findViewById(R.id.button_login);
         Button buttonRegister = (Button) findViewById(R.id.button_register);
         buttonLogin.setOnClickListener(new View.OnClickListener() {

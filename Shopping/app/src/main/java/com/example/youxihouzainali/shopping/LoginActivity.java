@@ -14,16 +14,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText edittext_username;
-    private  EditText edittext_password;
-    private  EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        edittext_username = (EditText)findViewById(R.id.edittext_username);
-        edittext_password = (EditText)findViewById(R.id.edittext_pass);
-        editText = (EditText)findViewById(R.id.edit_text2);
         //final MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, "User.db", null, 1);
         //dbHelper.getWritableDatabase();
         ActionBar actionbar = getSupportActionBar();
@@ -34,12 +28,13 @@ public class LoginActivity extends AppCompatActivity {
         button_eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                    editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                EditText editText2 = (EditText)findViewById(R.id.edit_text2);
+                if(editText2.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                    editText2.setInputType(InputType.TYPE_CLASS_TEXT);
                     Toast.makeText(LoginActivity.this, "PASSWORD->TEXT", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    editText2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     Toast.makeText(LoginActivity.this, "TEXT->PASSWORD", Toast.LENGTH_SHORT).show();
                     //这个setInputType为什么没作用，明明toast都能成功？！！
                 }
@@ -56,9 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editText1 = (EditText) findViewById(R.id.edit_text1);
+                EditText editText2 = (EditText) findViewById(R.id.edit_text2);
                 String username = null, password = null;
-                //username = edittext_username.getText().toString();
-                //password = edittext_password.getText().toString();
+                username = editText1.getText().toString();
+                password = editText2.getText().toString();
+                Toast.makeText(LoginActivity.this, username, Toast.LENGTH_SHORT).show();
+
                 /*SQLiteDatabase db = dbHelper.getWritableDatabase();
                 //String rightpassword = db.rawQuery("select password from user where username=?", new String[]{username});
                 Cursor cursor = db.query("user", null, "where username = ?", new String[]{username}, null, null, null);
