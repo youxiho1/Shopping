@@ -11,6 +11,11 @@
         android:text="增加商品"
         />
 
+    <TextView
+        android:id="@+id/textview_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -79,9 +84,18 @@
             android:text="选择图片"/>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="220dip"
+        android:paddingTop="10dip"
+        />
+
     <Button
         android:id="@+id/Btn_Enter"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="确认"/>
+        android:text="确认"
+        />
 </LinearLayout>
