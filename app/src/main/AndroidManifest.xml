@@ -23,7 +23,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".NewShopActivity" />
         <activity android:name=".NewMarginActivity" />
-        <activity android:name=".MarginActivity"></activity>
+        <activity android:name=".MarginActivity" />
+        <activity android:name=".MyShopActivity"/>
     </application>
 
 </manifest>

@@ -22,9 +22,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_MARGIN = "create table Margin("
             + "id integer primary key autoincrement, "
-            + "username text, "
+            + "shopname text, "
             + "name text, "
-            + "price real, "
+            + "price text, "
             + "describe text, "
             + "picture blob)";
 

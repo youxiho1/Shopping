@@ -75,11 +75,11 @@ public class NewMarginActivity extends AppCompatActivity {
                 EditText editText_price = (EditText)findViewById(R.id.edit_price);
                 String name = editText_name.getText().toString();
                 String descirbe = editText_describe.getText().toString();
-                double price = Double.parseDouble(editText_price.getText().toString());
-                if(imagePath.equals("") || name.equals("") || descirbe.equals("") || editText_price.getText().toString().equals("")) {
+                String price = editText_price.getText().toString();
+                if(imagePath.equals("") || name.equals("") || descirbe.equals("") || price.equals("")) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(NewMarginActivity.this);
                     dialog.setTitle("信息不完整");
-                    dialog.setMessage("您没有填全所有应填的信息");
+                    dialog.setMessage("您没有填全应填的信息");
                     dialog.setCancelable(false);
                     dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -89,7 +89,7 @@ public class NewMarginActivity extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
-                if(price == 0) {
+                /*if(Double.parseDouble(price) == 0) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(NewMarginActivity.this);
                     dialog.setTitle("信息错误");
                     dialog.setMessage("价格不能设置为0元");
@@ -102,6 +102,7 @@ public class NewMarginActivity extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
+                */
                 String shopname = null;
                 dbHelper = new MyDatabaseHelper(NewMarginActivity.this, "Shopping.db", null, 2);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -120,7 +121,7 @@ public class NewMarginActivity extends AppCompatActivity {
                 values.put("shopname", shopname);
                 db.insert("Margin", null, values);
                 values.clear();
-                Intent intent = new Intent(NewMarginActivity.this, MarginActivity.class);
+                Intent intent = new Intent(NewMarginActivity.this, MyShopActivity.class);
                 intent.putExtra("extra_data", uname);
                 startActivity(intent);
             }
