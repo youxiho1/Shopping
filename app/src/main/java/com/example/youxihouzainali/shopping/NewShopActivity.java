@@ -94,6 +94,8 @@ public class NewShopActivity extends AppCompatActivity {
                 values.put("username", uname);
                 db.insert("Shop", null, values);
                 values.clear();
+                values.put("shopflag", 1);
+                db.update("User", values, "username = ?", new String[] {uname});
                 Intent intent = new Intent(NewShopActivity.this, MyShopActivity.class);
                 intent.putExtra("extra_data", uname);
                 startActivity(intent);

@@ -24,7 +24,9 @@
         <activity android:name=".NewShopActivity" />
         <activity android:name=".NewMarginActivity" />
         <activity android:name=".MarginActivity" />
-        <activity android:name=".MyShopActivity"/>
+        <activity android:name=".MyShopActivity" />
+        <activity android:name=".ShoppingActivity" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>

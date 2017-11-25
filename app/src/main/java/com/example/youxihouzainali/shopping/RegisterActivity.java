@@ -96,16 +96,29 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 //还差checkbox和手机验证码（验证码）
                 if (password.equals(repassword)) {
+                    int id = -1;
                     if (username.length() == 0 || password.length() == 0) {
                         alert("提示", "您的信息未填写完整");
                         return;
                     }
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    Cursor cursor = db.query("User", null, "username=?", new String[] {username}, null, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        do {
+                            id = cursor.getInt(cursor.getColumnIndex("id"));
+                        } while (cursor.moveToNext());
+                    }
+                    if(id != -1) {
+                        alert("提示", "该用户名已被注册");
+                        return;
+                    }
+                    cursor.close();
                     ContentValues values = new ContentValues();
                     //开始组装第一条数据
                     values.put("username", username);
                     values.put("password", password);
                     values.put("ownerflag", flag);
+                    values.put("shopflag", 0);
                     db.insert("User", null, values);    //插入第一条数据
                     values.clear();
                     Toast.makeText(RegisterActivity.this, "successful", Toast.LENGTH_SHORT).show();
@@ -116,9 +129,9 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(RegisterActivity.this, "YOU ARE CUSTOMER", Toast.LENGTH_SHORT).show();
-                        //Intent intent = new Intent(RegisterActivity.this, ShoppingActivity.class);
-                        //intent.putExtra("extra_data", username);
-                        //startActivity(intent);
+                        Intent intent = new Intent(RegisterActivity.this, ShoppingActivity.class);
+                        intent.putExtra("extra_data", username);
+                        startActivity(intent);
                     }
                 }
             }

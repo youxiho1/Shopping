@@ -67,10 +67,34 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 cursor.close();
                if(password.equals(rightPassword)) {
+                    int ownerflag = 0, shopflag = 0;
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                     //Intent intent = new Intent(LoginActivity.this, ShoppingActivity.class);
                     //startActivity(intent);
-                }
+                    cursor = db.query("User", null, "username=?", new String[] {username}, null, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        do {
+                             ownerflag = cursor.getInt(cursor.getColumnIndex("ownerflag"));
+                             shopflag = cursor.getInt(cursor.getColumnIndex("shopflag"));
+                            } while (cursor.moveToNext());
+                       }
+                       cursor.close();
+                        if(ownerflag == 1 && shopflag == 1) {
+                            Intent intent = new Intent(LoginActivity.this, MyShopActivity.class);
+                            intent.putExtra("extra_data", username);
+                            startActivity(intent);
+                        }
+                        else if(ownerflag == 1 && shopflag == 0) {
+                            Intent intent = new Intent(LoginActivity.this, NewShopActivity.class);
+                            intent.putExtra("extra_data", username);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(LoginActivity.this, ShoppingActivity.class);
+                            intent.putExtra("extra_data", username);
+                            startActivity(intent);
+                        }
+                    }
                 else
                     Toast.makeText(LoginActivity.this, "密码错误，请重新输入", Toast.LENGTH_SHORT).show();
             }

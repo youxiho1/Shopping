@@ -13,6 +13,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + "id integer primary key autoincrement, "
             + "username text, "
             + "password text, "
+            + "shopflag integer, "
             + "ownerflag integer)";
     public static final String CREATE_SHOP = "create table Shop("
             + "id integer primary key autoincrement, "
