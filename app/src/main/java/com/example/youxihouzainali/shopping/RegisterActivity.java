@@ -109,8 +109,17 @@ public class RegisterActivity extends AppCompatActivity {
                     db.insert("User", null, values);    //插入第一条数据
                     values.clear();
                     Toast.makeText(RegisterActivity.this, "successful", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(RegisterActivity.this, ShoppingActivity.class);
-                    //startActivity(intent);
+                    if(flag == 1) {
+                        Intent intent = new Intent(RegisterActivity.this, NewShopActivity.class);
+                        intent.putExtra("extra_data", username);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(RegisterActivity.this, "YOU ARE CUSTOMER", Toast.LENGTH_SHORT).show();
+                        //Intent intent = new Intent(RegisterActivity.this, ShoppingActivity.class);
+                        //intent.putExtra("extra_data", username);
+                        //startActivity(intent);
+                    }
                 }
             }
         });

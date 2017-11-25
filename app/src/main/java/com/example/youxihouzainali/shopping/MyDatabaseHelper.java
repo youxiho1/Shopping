@@ -14,6 +14,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + "username text, "
             + "password text, "
             + "ownerflag integer)";
+    public static final String CREATE_SHOP = "create table Shop("
+            + "id integer primary key autoincrement, "
+            + "username text, "
+            + "shopname text, "
+            + "shoppicture text)";
 
     public static final String CREATE_MARGIN = "create table Margin("
             + "id integer primary key autoincrement, "
@@ -45,6 +50,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER);
+        db.execSQL(CREATE_SHOP);
         db.execSQL(CREATE_CART);
         db.execSQL(CREATE_HISTORY);
         db.execSQL(CREATE_MARGIN);
@@ -54,6 +60,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists User");
         db.execSQL("drop table if exists Margin");
+        db.execSQL("drop table if exists Shop");
         db.execSQL("drop table if exists History");
         db.execSQL("drop table if exists Cart");
         onCreate(db);
