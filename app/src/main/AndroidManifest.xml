@@ -27,7 +27,8 @@
         <activity android:name=".MyShopActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".CartActivity" />
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

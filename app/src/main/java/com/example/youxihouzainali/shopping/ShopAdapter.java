@@ -1,5 +1,7 @@
 package com.example.youxihouzainali.shopping;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -17,26 +19,42 @@ import java.util.List;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     private List<Shop> mShopList;
-
+    private Context mContext;
+    private String username;
     static class ViewHolder extends RecyclerView.ViewHolder {
+        View shopView;
         ImageView ShopImage;
         TextView ShopName;
 
         public ViewHolder(View view) {
             super(view);
+            shopView = view;
             ShopImage = (ImageView) view.findViewById(R.id.shop_image);
             ShopName = (TextView) view.findViewById(R.id.shop_name);
         }
     }
-    public ShopAdapter(List<Shop> shopList) {
+    public ShopAdapter(List<Shop> shopList, String name1) {
         mShopList = shopList;
+        username = name1;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shop_item, parent, false);
-        ViewHolder holder = new ShopAdapter.ViewHolder(view);
+        mContext = parent.getContext();
+        final ViewHolder holder = new ViewHolder(view);
+        holder.shopView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Shop shop = mShopList.get(position);
+                Intent intent = new Intent(mContext,DetailsActivity.class);
+                intent.putExtra("extra_data", username);
+                intent.putExtra("shopname", shop.getName());
+                mContext.startActivity(intent);
+            }
+        });
         return holder;
     }
 

@@ -34,7 +34,9 @@ public class NewMarginActivity extends AppCompatActivity {
 
     String uname = null;
     private String imagePath = null;
+    private String marginname = null;
     public static final int CHOOSE_PHOTO = 2;
+    private int flag;
     private MyDatabaseHelper dbHelper;
     private ImageView picture;
     @Override
@@ -46,6 +48,8 @@ public class NewMarginActivity extends AppCompatActivity {
             actionbar.hide();
         Intent intent = getIntent();
         uname = intent.getStringExtra("extra_data");
+        marginname = intent.getStringExtra("name");
+        flag = intent.getIntExtra("flag",1);
         TextView textView = (TextView) findViewById(R.id.textview_username);
         textView.setText(uname);
         dbHelper = new MyDatabaseHelper(this, "Shopping.db", null, 2);
@@ -119,8 +123,13 @@ public class NewMarginActivity extends AppCompatActivity {
                 values.put("price", price);
                 values.put("name", name);
                 values.put("shopname", shopname);
-                db.insert("Margin", null, values);
-                values.clear();
+                if(flag == 1) {
+                    db.insert("Margin", null, values);
+                    values.clear();
+                }
+                else if(flag == 2) {
+                    db.update("Margin", values, "name=?", new String[]{marginname});
+                }
                 Intent intent = new Intent(NewMarginActivity.this, MyShopActivity.class);
                 intent.putExtra("extra_data", uname);
                 startActivity(intent);

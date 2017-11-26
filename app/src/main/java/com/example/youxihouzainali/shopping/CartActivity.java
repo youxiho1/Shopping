@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,9 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        ActionBar actionbar = getSupportActionBar();
+        if(actionbar != null)
+            actionbar.hide();
         Intent intent = getIntent();
         uname = intent.getStringExtra("extra_data");
         Button btn_pay = (Button) findViewById(R.id.btnpay);
@@ -46,7 +50,7 @@ public class CartActivity extends AppCompatActivity {
                 }
                 cursor.close();
                 Intent intent = new Intent(CartActivity.this, HistoryActivity.class);
-                intent.putExtra("data_extra", uname);
+                intent.putExtra("extra_data", uname);
                 startActivity(intent);
             }
         });

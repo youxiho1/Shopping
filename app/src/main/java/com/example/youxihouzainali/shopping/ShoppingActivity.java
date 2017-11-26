@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,14 +23,25 @@ public class ShoppingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
+        ActionBar actionbar = getSupportActionBar();
+        if(actionbar != null)
+            actionbar.hide();
         final Intent intent = getIntent();
         uname = intent.getStringExtra("extra_data");
         Button btn_cart = (Button)findViewById(R.id.cart);
         btn_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("username", uname);
+                values.put("marginid", 1);
+                values.put("number", 3);
+                db.insert("Cart", null, values);
+                values.clear();
                 Intent intent = new Intent(ShoppingActivity.this, CartActivity.class);
                 intent.putExtra("extra_data", uname);
+
                 startActivity(intent);
             }
         });
@@ -37,7 +49,7 @@ public class ShoppingActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ShopAdapter adapter = new ShopAdapter(shopList);
+        ShopAdapter adapter = new ShopAdapter(shopList, uname);
         recyclerView.setAdapter(adapter);
     }
 

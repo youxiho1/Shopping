@@ -1,6 +1,7 @@
 package com.example.youxihouzainali.shopping;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,9 @@ public class MarginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_margin);
+        ActionBar actionbar = getSupportActionBar();
+        if(actionbar != null)
+            actionbar.hide();
         Intent intent = getIntent();
         uname = intent.getStringExtra("extra_data");
         Button btn = (Button) findViewById(R.id.btn);

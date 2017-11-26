@@ -34,7 +34,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + "username text, "
             + "marginid integer, "
             + "number integer, "
-            + "buy integer)";
+            + "payflag integer)";
     public static final String CREATE_CART = "create table Cart("
             + "id integer primary key autoincrement, "
             + "username text, "
