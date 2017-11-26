@@ -1,5 +1,6 @@
 package com.example.youxihouzainali.shopping;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,13 +22,15 @@ public class ShoppingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         uname = intent.getStringExtra("extra_data");
         Button btn_cart = (Button)findViewById(R.id.cart);
         btn_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent = new Intent(ShoppingActivity.this, CartActivity.class);
+                intent.putExtra("extra_data", uname);
+                startActivity(intent);
             }
         });
         initShops();              //初始化数据

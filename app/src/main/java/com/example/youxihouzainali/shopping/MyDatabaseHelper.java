@@ -27,17 +27,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             + "name text, "
             + "price text, "
             + "describe text, "
-            + "picture blob)";
+            + "picture text)";
 
     public static final String CREATE_HISTORY = "create table History("
             + "id integer primary key autoincrement, "
-            + "customerid integer, "
+            + "username text, "
             + "marginid integer, "
             + "number integer, "
             + "buy integer)";
     public static final String CREATE_CART = "create table Cart("
             + "id integer primary key autoincrement, "
-            + "customerid integer, "
+            + "username text, "
             + "marginid integer, "
             + "number integer)";
 
